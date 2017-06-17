@@ -11,8 +11,8 @@ module objects {
         //hit: boolean = false;
         health: number = 100;
         shield: number = 100;
-        width: number = 99;
-        height: number = 75;
+        width: number = 75;
+        height: number = 99;
         //rot: number;
         isColliding: boolean = false;
         bullet: _Bullet;
@@ -97,8 +97,8 @@ module objects {
         }
 
         public Update(): void {
-
-            this.rotation = Math.atan2(this.MY - this.y,this.MX - this.x) * 180 / Math.PI;
+            
+            this.rotation = Math.atan2(this.MY - this.y, this.MX - this.x) * 180 / Math.PI;
 
             if(this.moveLeft) {
                 this.x -= this.speed;
