@@ -14,6 +14,12 @@ var objects;
         __extends(_Bullet, _super);
         function _Bullet() {
             var _this = _super.call(this, "./Assets/Sprites/laserRed.png") || this;
+            _this.player = new objects._Player();
+            _this.width = 9;
+            _this.height = 33;
+            _this.speed = 3;
+            _this.collision = false;
+            _this.shoot = false;
             _this.regX = _this.width * 0.5;
             _this.regY = _this.height * 0.5;
             return _this;
@@ -26,21 +32,26 @@ var objects;
             this._reset();
         };
         _Bullet.prototype.Update = function () {
+            this.bulletDespawn();
         };
         _Bullet.prototype.bulletDespawn = function () {
-            if (this.x >= 640 || this.x <= 0 || this.y >= 480 || this.y <= 0) {
+            if (this.x >= 640 || this.x <= 0 || this.y >= 480 || this.y <= 0 || this.collision) {
+                this.shoot = false;
                 this._reset();
             }
         };
-        _Bullet.prototype.bulletFire = function (stage) {
-            this.MX = stage.mouseX + 10000;
-            this.MY = stage.mouseY + 10000;
-            this.bulletMove(this.MX, this.MY);
+        _Bullet.prototype.bulletFire = function () {
+            this.rotation = Math.atan2(this.MY - this.y, this.MX - this.x) * 180 / Math.PI;
+            this.shoot = true;
         };
         _Bullet.prototype.bulletMove = function (posX, posY) {
-            /*this.x -= (posX/);
-            this.y -= ();*/
-            console.log("bullet Move working");
+            if (this.shoot) {
+                //make bullet go forward
+            }
+        };
+        _Bullet.prototype.giveData = function (SX, SY) {
+            this.MX = SX;
+            this.MY = SY;
         };
         return _Bullet;
     }(createjs.Bitmap));

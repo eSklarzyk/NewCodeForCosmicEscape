@@ -51,6 +51,8 @@
     }
     // Game Loop - triggers every frame
     function Update() {
+        bullet.giveData(stage.mouseX, stage.mouseY);
+        player.giveData(stage.mouseX, stage.mouseY);
         player.Update();
         bullet.Update();
         stage.update(); // refresh the stage
@@ -61,27 +63,6 @@
         bullet = new objects._Bullet();
         stage.addChild(bullet);
     }
-    /*function spawnAsteroid() {
-      stage.addChild(asteroid);
-      asteroid.x = Math.floor((Math.random() * 640));
-      asteroid.y = Math.floor((Math.random() * -10) - 1);//top of stage?
-      playerXHold = player.x;
-      playerYHold = player.y;
-      check = 0;
-      spawned = true;
-    }
-  
-    function asteroidDespawn() {
-      if (asteroid.x >= 640 || asteroid.x <= 0 || asteroid.y >= 480 || hit) {
-        stage.removeChild(asteroid);
-        spawned = false;
-      }
-    }
-  
-    function asteroidMove()
-    {
-      asteroid.y += speed;
-    }*/
     window.onload = Start;
 })();
 //# sourceMappingURL=game.js.map
