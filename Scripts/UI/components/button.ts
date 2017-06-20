@@ -1,75 +1,28 @@
-(function (){
 
-window.ui = window.ui || {};
+module objects {  //MODULE == namespace
 
-let SimpleButton = function (label) {
-this.label = label;
-this.initialize();
-
-}
+export class Button extends createjs.Bitmap { //blueprint  //export allows you to get a handle through other files
 
 
-let p = SimpleButton.prototype = new createjs.Container();
-
-
-function initialize(){
-this.drawButton(); 
+constructor(){ //function initializes
+  super ("../../Assets/Sprites/enemyUFO.png")    //asking path for bitmap
+this.Start();
 
 }
 
 
-p.drawButton = function () {
-    this.removeAllChildren();
-    this.labelTxt = new createjs.Text(this.label, this.fontSize + this.color);
-    this.labelTxt.textAlign = 'center';
+private Start(): void{
 
-    this.labelTxt.textBaseline = 'top';
-    this.width = this.labelTxt.getMeasuredWidth() + 30;
-    this.height = this.labelTxt.getMeasuredHeight() + 20;
-    this.labelTxt.x = this.width / 2;
-    this.labelTxt.y = 10;
-    this.background = new createjs.Shape();
-    this.background.graphics.beginStroke(this.borderColor)
-        .beginFill(this.buttonColor)
-        .drawRect(0, 0, this.width, this.height);
-    this.addChild(this.background, this.labelTxt);
+    this.regX = this.getBounds().width * 0.5;
+    this.regY = this.getBounds().height * 0.5;
+
+    this.y = 430;
+    this.x = 330
+
 }
 
-
-p.setButtonListeners = function () {
-    this.cursor = 'pointer';
-    this.on('click', this.onButtonOver);
-    
-}
-  p.playGame = function (e) {
-      this.dispatchEvent(game.GameStateEvents.GAME);
-   }
-p.onButtonOver = function () {
-    this.buttonColor = this.overColor;
-    this.drawButton();
+public Update():void {
+ this.x = stage
 }
 
-
-  window.ui.SimpleButton = SimpleButton;
-}());
-
-
-
-
-
-/* let label;
-let width;
-let height;
-let background;
-let labelTxt;
-let fontSize = 24;
-let borderColor = '#000';
-let buttonColor = '#ccc';
-let upColor = '#ccc';
-let overColor = '#aaa';
-
-let Container_initialize = p.initialize;
-   */
-
-
-})
+}} 

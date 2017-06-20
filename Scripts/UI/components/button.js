@@ -1,39 +1,34 @@
-(function () {
-    window.ui = window.ui || {};
-    var SimpleButton = function (label) {
-        this.label = label;
-        this.initialize();
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
-    var p = SimpleButton.prototype = new createjs.Container();
-    function initialize() {
-        this.drawButton();
-    }
-    p.drawButton = function () {
-        this.removeAllChildren();
-        this.labelTxt = new createjs.Text(this.label, this.fontSize + this.color);
-        this.labelTxt.textAlign = 'center';
-        this.labelTxt.textBaseline = 'top';
-        this.width = this.labelTxt.getMeasuredWidth() + 30;
-        this.height = this.labelTxt.getMeasuredHeight() + 20;
-        this.labelTxt.x = this.width / 2;
-        this.labelTxt.y = 10;
-        this.background = new createjs.Shape();
-        this.background.graphics.beginStroke(this.borderColor)
-            .beginFill(this.buttonColor)
-            .drawRect(0, 0, this.width, this.height);
-        this.addChild(this.background, this.labelTxt);
-    };
-    p.setButtonListeners = function () {
-        this.cursor = 'pointer';
-        this.on('click', this.onButtonOver);
-    };
-    p.playGame = function (e) {
-        this.dispatchEvent(game.GameStateEvents.GAME);
-    };
-    p.onButtonOver = function () {
-        this.buttonColor = this.overColor;
-        this.drawButton();
-    };
-    window.ui.SimpleButton = SimpleButton;
-}());
+})();
+var objects;
+(function (objects) {
+    var Button = (function (_super) {
+        __extends(Button, _super);
+        function Button() {
+            var _this = _super.call(this, "../../Assets/Sprites/enemyUFO.png") //asking path for bitmap
+             || this;
+            _this.Start();
+            return _this;
+        }
+        Button.prototype.Start = function () {
+            this.regX = this.getBounds().width * 0.5;
+            this.regY = this.getBounds().height * 0.5;
+            this.y = 430;
+            this.x = 330;
+        };
+        Button.prototype.Update = function () {
+            this.x = stage;
+        };
+        return Button;
+    }(createjs.Bitmap));
+    objects.Button = Button;
+})(objects || (objects = {}));
 //# sourceMappingURL=button.js.map
