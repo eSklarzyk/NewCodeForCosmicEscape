@@ -31,7 +31,6 @@ var objects;
             _this.regY = _this.height * 0.5;
             window.addEventListener('keydown', _this.KeyDown.bind(_this), false);
             window.addEventListener('keyup', _this.KeyUp.bind(_this), false);
-            window.addEventListener('click', _this.Shoot.bind(_this), false);
             _this.Start();
             return _this;
         }
@@ -94,21 +93,18 @@ var objects;
         };
         _Player.prototype.Update = function () {
             this.rotation = Math.atan2(this.MY - this.y, this.MX - this.x) * 180 / Math.PI;
-            if (this.moveLeft) {
+            if (this.moveLeft && this.x >= 0 + 50) {
                 this.x -= this.speed;
             }
-            if (this.moveRight) {
+            if (this.moveRight && this.x <= 640 - 50) {
                 this.x += this.speed;
             }
-            if (this.moveUp) {
+            if (this.moveUp && this.y >= 0 + 50) {
                 this.y -= this.speed;
             }
-            if (this.moveDown) {
+            if (this.moveDown && this.y <= 480 - 50) {
                 this.y += this.speed;
             }
-        };
-        _Player.prototype.Shoot = function (stage) {
-            console.log("Fire Bullet!");
         };
         _Player.prototype.Damage = function (dam) {
             this.shield -= dam;
@@ -122,31 +118,19 @@ var objects;
             switch (event.keyCode) {
                 case 38: /*up arrow*/
                 case 87:
-                    console.log("move up");
-                    if (this.y >= 0) {
-                        this.moveUp = true;
-                    }
+                    this.moveUp = true;
                     break;
                 case 37: /*left arrow*/
                 case 65:
-                    console.log("move Left");
-                    if (this.x >= 0) {
-                        this.moveLeft = true;
-                    }
+                    this.moveLeft = true;
                     break;
                 case 40: /*down arrow*/
                 case 83:
-                    console.log("move down");
-                    if (this.x <= 480) {
-                        this.moveDown = true;
-                    }
+                    this.moveDown = true;
                     break;
                 case 39: /*right arrow*/
                 case 68:
-                    console.log("move right");
-                    if (this.y <= 640) {
-                        this.moveRight = true;
-                    }
+                    this.moveRight = true;
                     break;
                 case 81:
                     console.log("paused");

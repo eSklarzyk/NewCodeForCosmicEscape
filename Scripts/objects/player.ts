@@ -31,7 +31,6 @@ module objects {
 
             window.addEventListener('keydown', this.KeyDown.bind(this), false);
             window.addEventListener('keyup', this.KeyUp.bind(this), false);
-            window.addEventListener('click', this.Shoot.bind(this), false);
 
             this.Start();
         }
@@ -100,25 +99,20 @@ module objects {
             
             this.rotation = Math.atan2(this.MY - this.y, this.MX - this.x) * 180 / Math.PI;
 
-            if(this.moveLeft) {
+            if(this.moveLeft && this.x >= 0 + 50) {
                 this.x -= this.speed;
             }
 
-            if (this.moveRight) {
+            if (this.moveRight && this.x <= 640 - 50) {
                 this.x += this.speed;
             }
-            if(this.moveUp) {
+            if(this.moveUp && this.y >= 0 + 50) {
                 this.y -= this.speed;
             }
 
-            if(this.moveDown) {
+            if(this.moveDown && this.y <= 480 - 50) {
                 this.y += this.speed;
             }
-        }
-
-        public Shoot(stage: any) {
-            console.log("Fire Bullet!");
-            
         }
 
         public Damage(dam: number) {
@@ -136,38 +130,22 @@ module objects {
             switch (event.keyCode) {
                 case 38: /*up arrow*/
                 case 87: /* W Key */
-                    console.log("move up");
-                    if(this.y >= 0)
-                    {
                         this.moveUp = true;
-                    }
                     break;
 
                 case 37: /*left arrow*/
                 case 65: /* A Key */
-                    console.log("move Left");
-                    if(this.x >= 0)
-                    {
                         this.moveLeft = true;
-                    }
                     break;
 
                 case 40: /*down arrow*/
                 case 83: /* S Key */
-                    console.log("move down");
-                    if(this.x <= 480)
-                    {
                         this.moveDown = true;
-                    }
                     break;
 
                 case 39: /*right arrow*/
                 case 68: /* D Key */
-                    console.log("move right");
-                    if(this.y <= 640)
-                    {
                         this.moveRight = true;
-                    }
                     break;
 
                 case 81: /* pause */

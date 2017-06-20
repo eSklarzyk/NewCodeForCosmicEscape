@@ -65,11 +65,10 @@
   }
 
   function Main() {
-    player = new objects._Player();
-    stage.addChild(player);
     bullet = new objects._Bullet();
     stage.addChild(bullet);
-
+    player = new objects._Player();
+    stage.addChild(player);
   }
 
   window.onload = Start;
