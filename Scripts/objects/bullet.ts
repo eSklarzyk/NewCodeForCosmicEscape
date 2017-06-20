@@ -2,23 +2,29 @@ module objects {
     export class _Bullet extends createjs.Bitmap {
 
         player: objects._Player = new objects._Player();
-        width: number = 9;
-        height: number = 33;
+        width: number = 33;
+        height: number = 9;
         speed: number = 3;
         collision: boolean = false;
         shoot: boolean = false;
         MX: number;
         MY: number;
+        HoldMX: number;
+        HoldMY: number;
 
         constructor() {
             super("./Assets/Sprites/laserRed.png");
+            window.addEventListener('click', this.bulletFire.bind(this), false);
             this.regX = this.width * 0.5;
             this.regY = this.height * 0.5;
         }
 
         private _reset(): void {
-            this.x = this.player.x;
-            this.y = this.player.y;
+            if(this.shoot == false)
+            {
+                this.x = this.player.x;
+                this.y = this.player.y;
+            }
         }
 
         public Start(): void {
@@ -26,7 +32,9 @@ module objects {
         }
 
         public Update(): void {
+            this._reset();
             this.bulletDespawn();
+            this.bulletMove(this.HoldMX, this.HoldMY);
         }
 
         public bulletDespawn(): void {
@@ -38,14 +46,20 @@ module objects {
 
         public bulletFire():void
         {
+            if(this.shoot == false)
+            {
             this.rotation = Math.atan2(this.MY - this.y,this.MX - this.x) * 180 / Math.PI;
+            this.HoldMX = this.MX;
+            this.HoldMY = this.MY;
             this.shoot = true;
+            }
         }
 
         public bulletMove(posX:number, posY:number): void {
-            if(this.shoot)
+            if(this.shoot == true)
             {
-                //make bullet go forward
+                this.x -= this.HoldMX * 0.05;
+                this.y -= this.HoldMY * 0.05;
             }
         }
 

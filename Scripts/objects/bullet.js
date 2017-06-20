@@ -15,24 +15,29 @@ var objects;
         function _Bullet() {
             var _this = _super.call(this, "./Assets/Sprites/laserRed.png") || this;
             _this.player = new objects._Player();
-            _this.width = 9;
-            _this.height = 33;
+            _this.width = 33;
+            _this.height = 9;
             _this.speed = 3;
             _this.collision = false;
             _this.shoot = false;
+            window.addEventListener('click', _this.bulletFire.bind(_this), false);
             _this.regX = _this.width * 0.5;
             _this.regY = _this.height * 0.5;
             return _this;
         }
         _Bullet.prototype._reset = function () {
-            this.x = this.player.x;
-            this.y = this.player.y;
+            if (this.shoot == false) {
+                this.x = this.player.x;
+                this.y = this.player.y;
+            }
         };
         _Bullet.prototype.Start = function () {
             this._reset();
         };
         _Bullet.prototype.Update = function () {
+            this._reset();
             this.bulletDespawn();
+            this.bulletMove(this.HoldMX, this.HoldMY);
         };
         _Bullet.prototype.bulletDespawn = function () {
             if (this.x >= 640 || this.x <= 0 || this.y >= 480 || this.y <= 0 || this.collision) {
@@ -41,12 +46,17 @@ var objects;
             }
         };
         _Bullet.prototype.bulletFire = function () {
-            this.rotation = Math.atan2(this.MY - this.y, this.MX - this.x) * 180 / Math.PI;
-            this.shoot = true;
+            if (this.shoot == false) {
+                this.rotation = Math.atan2(this.MY - this.y, this.MX - this.x) * 180 / Math.PI;
+                this.HoldMX = this.MX;
+                this.HoldMY = this.MY;
+                this.shoot = true;
+            }
         };
         _Bullet.prototype.bulletMove = function (posX, posY) {
-            if (this.shoot) {
-                //make bullet go forward
+            if (this.shoot == true) {
+                this.x -= this.HoldMX * 0.05;
+                this.y -= this.HoldMY * 0.05;
             }
         };
         _Bullet.prototype.giveData = function (SX, SY) {
