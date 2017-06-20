@@ -25,7 +25,7 @@ var objects;
             this.x = 330;
         };
         Button.prototype.Update = function () {
-            this.x = stage;
+            //this.x = stage;
         };
         return Button;
     }(createjs.Bitmap));
