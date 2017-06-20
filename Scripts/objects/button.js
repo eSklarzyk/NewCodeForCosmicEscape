@@ -15,14 +15,32 @@ var objects;
         function Button() {
             var _this = _super.call(this, "../../Assets/Sprites/enemyUFO.png") //asking path for bitmap
              || this;
-            _this.Start();
+            _this.drawButton();
+            _this.initialize();
             return _this;
         }
-        Button.prototype.Start = function () {
-            this.regX = this.getBounds().width * 0.5;
-            this.regY = this.getBounds().height * 0.5;
-            this.y = 430;
-            this.x = 330;
+        Button.prototype.drawButton = function () {
+            var label;
+            var width;
+            var height;
+            var background;
+            var labelTxt;
+            var fontSize;
+            var borderColor = '#000';
+            var buttonColor = '#ccc';
+            var but;
+        };
+        Button.prototype.initialize = function () {
+            this.drawButton(); // this.setButtonListeners();
+            this.setButtonListeners(event);
+        };
+        Button.prototype.setButtonListeners = function (event) {
+            this.cursor = 'pointer';
+            this.on('click', this.playGame);
+        };
+        Button.prototype.playGame = function (event) {
+            console.log('game play');
+            //this.dispatchEvent(game.GameStateEvents.GAME);
         };
         Button.prototype.Update = function () {
             //this.x = stage;
