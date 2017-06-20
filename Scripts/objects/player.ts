@@ -1,12 +1,11 @@
 module objects {
     export class _Player extends createjs.Bitmap {
 
-
+        asteroid: objects._Asteroid = new objects._Asteroid();
         moveLeft: boolean = false;
         moveRight: boolean = false;
         moveUp: boolean = false;
         moveDown: boolean = false;
-
         speed: number = 3;
         //hit: boolean = false;
         health: number = 100;
@@ -14,7 +13,7 @@ module objects {
         width: number = 75;
         height: number = 99;
         //rot: number;
-        isColliding: boolean = false;
+        //iscollision: boolean = false;
         bullet: _Bullet;
         //Loaded: number[];
         data: any;
@@ -120,7 +119,7 @@ module objects {
             if (this.shield <= 0) {
                 this.health -= dam;
                 if (this.health <= 0) {
-
+                    console.log("DEAD");
                 }
             }
         }
@@ -183,6 +182,15 @@ module objects {
                     break;
             }
         }
+
+        /*public playerCol()
+        {
+            if (utility.Vector2.Distance(new utility.Vector2(this.x, this.y), new utility.Vector2(this.asteroid.x, this.asteroid.y)) < 150)
+            {
+                this.Damage(50);
+                console.log("hit! on player");
+            }
+        }*/
 
         public giveData(SX:any, SY:any)
         {

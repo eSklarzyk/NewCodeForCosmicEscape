@@ -22,7 +22,7 @@ private Start(): void{
 }
 
 public Update():void {
- this.x = stage
+ 
 }
 
 }} 

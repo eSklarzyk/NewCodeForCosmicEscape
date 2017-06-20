@@ -4,6 +4,7 @@
     var stage;
     var player;
     var bullet;
+    var asteroid;
     function Start() {
         stage = new createjs.Stage(canvas); // create a stage container
         createjs.Ticker.framerate = 60;
@@ -58,6 +59,8 @@
         stage.update(); // refresh the stage
     }
     function Main() {
+        asteroid = new objects._Asteroid();
+        stage.addChild(asteroid);
         bullet = new objects._Bullet();
         stage.addChild(bullet);
         player = new objects._Player();
