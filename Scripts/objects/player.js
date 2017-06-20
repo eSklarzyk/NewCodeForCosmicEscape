@@ -14,6 +14,7 @@ var objects;
         __extends(_Player, _super);
         function _Player() {
             var _this = _super.call(this, "./Assets/Sprites/player.png") || this;
+            _this.asteroid = new objects._Asteroid();
             _this.moveLeft = false;
             _this.moveRight = false;
             _this.moveUp = false;
@@ -24,8 +25,6 @@ var objects;
             _this.shield = 100;
             _this.width = 75;
             _this.height = 99;
-            //rot: number;
-            _this.isColliding = false;
             _this.canvas = document.getElementById("canvas");
             _this.regX = _this.width * 0.5;
             _this.regY = _this.height * 0.5;
@@ -111,6 +110,7 @@ var objects;
             if (this.shield <= 0) {
                 this.health -= dam;
                 if (this.health <= 0) {
+                    console.log("DEAD");
                 }
             }
         };
@@ -162,6 +162,14 @@ var objects;
                     break;
             }
         };
+        /*public playerCol()
+        {
+            if (utility.Vector2.Distance(new utility.Vector2(this.x, this.y), new utility.Vector2(this.asteroid.x, this.asteroid.y)) < 150)
+            {
+                this.Damage(50);
+                console.log("hit! on player");
+            }
+        }*/
         _Player.prototype.giveData = function (SX, SY) {
             this.MX = SX;
             this.MY = SY;
