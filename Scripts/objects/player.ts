@@ -7,74 +7,112 @@ module objects {
         moveUp: boolean = false;
         moveDown: boolean = false;
 
-        speed: number = 5;
-        hit: boolean = false;
+        speed: number = 3;
+        //hit: boolean = false;
         health: number = 100;
         shield: number = 100;
-        width: number;
-        height: number;
-        hold: any;
-        isColliding: boolean;
-        //bullet:_Bullet;
-        Loaded: number[];
+        width: number = 75;
+        height: number = 99;
+        //rot: number;
+        isColliding: boolean = false;
+        bullet: _Bullet;
+        //Loaded: number[];
+        data: any;
+        _Data: any;
+        sprite:any;
+        MX:number;
+        MY:number;
         canvas = document.getElementById("canvas");
-
 
         constructor() {
             super("./Assets/Sprites/player.png");
-
             this.regX = this.width * 0.5;
             this.regY = this.height * 0.5;
 
             window.addEventListener('keydown', this.KeyDown.bind(this), false);
             window.addEventListener('keyup', this.KeyUp.bind(this), false);
-            window.addEventListener('click', this.Shoot.bind(this),false);
-
-            this.x = 320;
-            this.y = 240;
 
             this.Start();
         }
 
         private _reset(): void {
-            this.x = 640/2;
-            this.y = 480/2;
+            this.x = 640 / 2;
+            this.y = 480 / 2;
         }
 
         public Start(): void {
-            //this._reset();
-            this.isColliding = false;
+            this._reset();
+
+           /*this.data = {
+                images: ["./Assets/Sprites/spritesheetv2.png"],
+
+                frames: [
+                    [1, 1, 162, 128, 0, 0, 0],
+                    [165, 1, 89, 68, 0, 0, 0],
+                    [165, 71, 67, 71, 0, 0, 0],
+                    [234, 71, 18, 40, 0, 0, 0],
+                    [234, 113, 18, 39, 0, 0, 0],
+                    [1, 131, 118, 160, 0, 0, 0],
+                    [121, 144, 111, 125, 0, 0, 0],
+                    [121, 271, 127, 128, 0, 0, 0],
+                    [1, 293, 117, 125, 0, 0, 0],
+                    [120, 401, 120, 120, 0, -7, -7],
+                    [1, 420, 95, 96, 0, 0, 0],
+                    [1, 518, 92, 66, 0, 0, 0],
+                    [1, 586, 87, 33, 0, -7, -5],
+                    [90, 586, 46, 49, 0, 0, 0],
+                    [95, 523, 58, 58, 0, 0, 0],
+                    [138, 583, 48, 50, 0, 0, 0],
+                    [188, 523, 65, 67, 0, 0, 0],
+                    [188, 592, 45, 15, 0, 0, 0]
+                ],
+
+                animations: {
+                    devilray: { frames: [0] },
+                    asteroid: { frames: [1] },
+                    asteroid4: { frames: [2] },
+                    missile1: { frames: [3] },
+                    missile2: { frames: [4] },
+                    mecha_body: { frames: [5] },
+                    player: { frames: [6] },
+                    enemypodcharged: { frames: [7] },
+                    ship2: { frames: [8] },
+                    shield2: { frames: [9] },
+                    hummer: { frames: [10] },
+                    fighter1: { frames: [11] },
+                    ebullet1: { frames: [12] },
+                    shield_pickup: { frames: [13] },
+                    asteroid3: { frames: [14] },
+                    asteroid2: { frames: [15] },
+                    drone: { frames: [16] },
+                    ebullet2: { frames: [17] }
+                },
+            }
+
+            this._Data = new createjs.SpriteSheet(this.data);
+            this.sprite = new createjs.Sprite(this._Data, "player");
+            createjs.DisplayObject = this.sprite;*/
             console.log("player working");
         }
 
         public Update(): void {
-            if(this.moveLeft) {
-                console.log("moving left");
-                this.x -= 10;
-            }
-
-            if(this.moveRight) {
-                this.x += 10;
-            }
-
-            if(this.moveUp) {
-                this.y -= 10;
-            }
-
-            if(this.moveDown) {
-                this.y += 10;
-            }
-
             
-            
-        }
+            this.rotation = Math.atan2(this.MY - this.y, this.MX - this.x) * 180 / Math.PI;
 
-        public Shoot(stage: any) {
-            console.log("Fire Bullet!");
-            let bullet:objects._Bullet = new objects._Bullet();
-            bullet.x = this.x;
-            bullet.y = this.y;
-            bullet.bulletFire(stage);
+            if(this.moveLeft && this.x >= 0 + 50) {
+                this.x -= this.speed;
+            }
+
+            if (this.moveRight && this.x <= 640 - 50) {
+                this.x += this.speed;
+            }
+            if(this.moveUp && this.y >= 0 + 50) {
+                this.y -= this.speed;
+            }
+
+            if(this.moveDown && this.y <= 480 - 50) {
+                this.y += this.speed;
+            }
         }
 
         public Damage(dam: number) {
@@ -82,99 +120,74 @@ module objects {
             if (this.shield <= 0) {
                 this.health -= dam;
                 if (this.health <= 0) {
-                    
+
                 }
             }
         }
 
-        public KeyDown(event:KeyboardEvent) {
-            //this.hold = event.target;
+        public KeyDown(event: KeyboardEvent) {
+
             switch (event.keyCode) {
                 case 38: /*up arrow*/
                 case 87: /* W Key */
-                    if (this.y >= 10) {
-                        this.y -= 10;
-                    }
-                    console.log("move up");
-                    this.moveUp = true;
-
+                        this.moveUp = true;
                     break;
+
                 case 37: /*left arrow*/
                 case 65: /* A Key */
-                    if (this.x >= 10) {
-                        this.x -= 10;
-                    }
-                    console.log("move Left");
-                    this.moveLeft = true;
+                        this.moveLeft = true;
                     break;
+
                 case 40: /*down arrow*/
                 case 83: /* S Key */
-                    if (this.y <= 395)//player sprit height 85
-                    {
-                        this.y += 10;
-                    }
-                    console.log("move down");
-                    this.moveDown = true;
+                        this.moveDown = true;
                     break;
+
                 case 39: /*right arrow*/
                 case 68: /* D Key */
-                    if (this.x <= 530)//player sprit width 110
-                    {
-                        this.x += 10;
-                    }
-
-                    console.log("move right");
-                    this.moveRight = true;
+                        this.moveRight = true;
                     break;
+
                 case 81: /* pause */
+                    console.log("paused");
                     //add paused/suiside
                     break;
             }
         }
 
-        public KeyUp(event:KeyboardEvent) {
-            //this.hold = event.target;
+        public KeyUp(event: KeyboardEvent) {
             switch (event.keyCode) {
                 case 38: /*up arrow*/
                 case 87: /* W Key */
-                    if (this.y >= 10) {
-                        this.y -= 10;
-                    }
-                    console.log("move up");
                     this.moveUp = false;
-
                     break;
+
                 case 37: /*left arrow*/
                 case 65: /* A Key */
-                    if (this.x >= 10) {
-                        this.x -= 10;
-                    }
-                    console.log("move Left");
                     this.moveLeft = false;
                     break;
+                    
                 case 40: /*down arrow*/
                 case 83: /* S Key */
-                    if (this.y <= 395)//player sprit height 85
-                    {
-                        this.y += 10;
-                    }
-                    console.log("move down");
                     this.moveDown = false;
                     break;
+
                 case 39: /*right arrow*/
                 case 68: /* D Key */
-                    if (this.x <= 530)//player sprit width 110
-                    {
-                        this.x += 10;
-                    }
-
-                    console.log("move right");
                     this.moveRight = false;
                     break;
+
                 case 81: /* pause */
+                    console.log("unpaused");
                     //add paused/suiside
                     break;
             }
+        }
+
+        public giveData(SX:any, SY:any)
+        {
+            this.MX = SX;
+            this.MY = SY;     
         }
     }
 }
