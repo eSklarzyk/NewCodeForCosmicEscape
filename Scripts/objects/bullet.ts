@@ -2,6 +2,7 @@ module objects {
     export class _Bullet extends createjs.Bitmap {
 
         player: objects._Player = new objects._Player();
+        asteroid: objects._Asteroid = new objects._Asteroid();
         width: number = 33;
         height: number = 9;
         speed: number = 3;
@@ -24,6 +25,7 @@ module objects {
             {
                 this.x = this.player.x;
                 this.y = this.player.y;
+                this.collision = false;
             }
         }
 
@@ -34,11 +36,12 @@ module objects {
         public Update(): void {
             this._reset();
             this.bulletDespawn();
+            this.bulletCol();
             this.bulletMove(this.HoldMX, this.HoldMY);
         }
 
         public bulletDespawn(): void {
-            if (this.x >= 640 || this.x <= 0 || this.y >= 480 || this.y <= 0 || this.collision) {
+            if (this.x >= 640 || this.x <= 0 || this.y >= 480 || this.y <= 0 || this.collision == true) {
                 this.shoot = false;
                 this._reset();
             }
@@ -60,6 +63,15 @@ module objects {
             {
                 this.x -= this.HoldMX * 0.05;
                 this.y -= this.HoldMY * 0.05;
+            }
+        }
+
+        public bulletCol()
+        {
+            if (utility.Vector2.Distance(new utility.Vector2(this.x, this.y), new utility.Vector2(this.asteroid.x, this.asteroid.y)) < 77)
+            {
+                this.collision = true;
+                console.log("hit!");
             }
         }
 

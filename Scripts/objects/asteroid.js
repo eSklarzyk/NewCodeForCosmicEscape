@@ -21,8 +21,8 @@ var objects;
             return _this;
         }
         _Asteroid.prototype._reset = function () {
-            this.x = 640 / 4;
-            this.y = 480 / 4;
+            this.x = 100;
+            this.y = 100;
         };
         _Asteroid.prototype.Start = function () {
             this._reset();

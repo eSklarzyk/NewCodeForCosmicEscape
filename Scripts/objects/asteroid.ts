@@ -11,8 +11,8 @@ module objects {
          }
 
           private _reset(): void {
-            this.x = 640 / 4;
-            this.y = 480 / 4;
+            this.x = 100;
+            this.y = 100;
         }
 
         public Start(): void {

@@ -15,6 +15,7 @@ var objects;
         function _Bullet() {
             var _this = _super.call(this, "./Assets/Sprites/laserRed.png") || this;
             _this.player = new objects._Player();
+            _this.asteroid = new objects._Asteroid();
             _this.width = 33;
             _this.height = 9;
             _this.speed = 3;
@@ -29,6 +30,7 @@ var objects;
             if (this.shoot == false) {
                 this.x = this.player.x;
                 this.y = this.player.y;
+                this.collision = false;
             }
         };
         _Bullet.prototype.Start = function () {
@@ -37,10 +39,11 @@ var objects;
         _Bullet.prototype.Update = function () {
             this._reset();
             this.bulletDespawn();
+            this.bulletCol();
             this.bulletMove(this.HoldMX, this.HoldMY);
         };
         _Bullet.prototype.bulletDespawn = function () {
-            if (this.x >= 640 || this.x <= 0 || this.y >= 480 || this.y <= 0 || this.collision) {
+            if (this.x >= 640 || this.x <= 0 || this.y >= 480 || this.y <= 0 || this.collision == true) {
                 this.shoot = false;
                 this._reset();
             }
@@ -57,6 +60,12 @@ var objects;
             if (this.shoot == true) {
                 this.x -= this.HoldMX * 0.05;
                 this.y -= this.HoldMY * 0.05;
+            }
+        };
+        _Bullet.prototype.bulletCol = function () {
+            if (utility.Vector2.Distance(new utility.Vector2(this.x, this.y), new utility.Vector2(this.asteroid.x, this.asteroid.y)) < 77) {
+                this.collision = true;
+                console.log("hit!");
             }
         };
         _Bullet.prototype.giveData = function (SX, SY) {
