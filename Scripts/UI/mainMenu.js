@@ -1,3 +1,4 @@
 //PATHS
-/// <reference path = "./components/button.ts" />
+/// <reference path = "../objects/button.ts" />
+//ema 
 //# sourceMappingURL=mainMenu.js.map
