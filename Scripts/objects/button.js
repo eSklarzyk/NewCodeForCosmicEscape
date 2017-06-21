@@ -27,14 +27,13 @@ var objects;
             this.y = 330;
             this.x = 300; // fixed position
             var butn;
-            var labelText;
-            labelText = "play game";
+            this.stage.addChild(butn);
         };
         Button.prototype.setButtonListeners = function (event) {
             this.cursor = 'pointer';
-            this.on('click', this.playGame);
+            this.on('click', this.action);
         };
-        Button.prototype.playGame = function (event) {
+        Button.prototype.action = function (event) {
             console.log('game play');
             //this.dispatchEvent(game.GameStateEvents.GAME);
         };

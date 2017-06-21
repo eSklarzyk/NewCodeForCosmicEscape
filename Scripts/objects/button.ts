@@ -19,18 +19,18 @@ this.setButtonListeners(event);
 public drawButton(): void{
 this.y = 330 ; this.x= 300; // fixed position
 var butn : Button;
-var labelText : string;
-labelText = "play game" ; 
+this.stage.addChild(butn);
+
 
 }
 
 private  setButtonListeners(event) {
 this.cursor = 'pointer';
-this.on('click', this.playGame)
+this.on('click', this.action)
 
 }
 
- playGame(event){
+ action(event){
 console.log('game play')
   //this.dispatchEvent(game.GameStateEvents.GAME);
 }

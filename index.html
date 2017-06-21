@@ -17,18 +17,42 @@
   <script src="./Scripts/lib/SoundJS/lib/soundjs-0.6.2.min.js"></script>
   <script src="./Scripts/lib/PreloadJS/lib/preloadjs-0.6.2.min.js"></script>
 
+
+<!--UI -->
 <script src = "./Scripts/UI/mainMenu.js"> </script> 
 <script src = "./Scripts/objects/button.js"> </script>
+<script src = "./Scripts/UI/assetManager.js"> </script>
+<script src = "./Scripts/UI/gameStates.js"> </script>
+<script src = "./Scripts/UI/cosEscape.js"> </script>
 
 
 
-<!--Game Scripts-->
+
+<!-- Game Scripts -->
 
   <script src="./Scripts/objects/bullet.js"></script>
   <script src="./Scripts/objects/player.js"></script>
   <script src="./Scripts/objects/asteroid.js"></script>
   <script src="./utility/utility.js"></script>
   <script src="./Scripts/core/game.js"></script>
+
+  <script>
+   var ARROW_KEY_SPACE = 32;
+   var ARROW_KEY_UP = 38;
+   var ARROW_KEY_DOWN = 40;
+   var ARROW_KEY_LEFT = 37;
+   var ARROW_KEY_RIGHT = 39;
+
+   var stage;
+   var canvas;
+   var spritesheet;
+   var screen_width;
+   var screen_height;
+   
+   function init() {
+      window.game = window.game || {};
+      game.main = new game.CosmicEscape();
+} </script>
 
 
 </body>
