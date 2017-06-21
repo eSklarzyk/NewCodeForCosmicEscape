@@ -12,27 +12,23 @@ var objects;
 (function (objects) {
     var Button = (function (_super) {
         __extends(Button, _super);
-        function Button() {
+        function Button(stage) {
             var _this = _super.call(this, "../../Assets/Sprites/enemyUFO.png") //asking path for bitmap
              || this;
-            _this.drawButton();
+            _this.stage = stage;
             _this.initialize();
             return _this;
         }
-        Button.prototype.drawButton = function () {
-            var label;
-            var width;
-            var height;
-            var background;
-            var labelTxt;
-            var fontSize;
-            var borderColor = '#000';
-            var buttonColor = '#ccc';
-            var but;
-        };
         Button.prototype.initialize = function () {
             this.drawButton(); // this.setButtonListeners();
             this.setButtonListeners(event);
+        };
+        Button.prototype.drawButton = function () {
+            this.y = 330;
+            this.x = 300; // fixed position
+            var butn;
+            var labelText;
+            labelText = "play game";
         };
         Button.prototype.setButtonListeners = function (event) {
             this.cursor = 'pointer';
@@ -43,7 +39,8 @@ var objects;
             //this.dispatchEvent(game.GameStateEvents.GAME);
         };
         Button.prototype.Update = function () {
-
+            var x = this.stage;
+            var y = this.stage;
         };
         return Button;
     }(createjs.Bitmap));

@@ -2,34 +2,25 @@
 module objects {  //MODULE == namespace
 
 export class Button extends createjs.Bitmap { //blueprint  //export allows you to get a handle through other files
-
-
-constructor(){ //function initializes
+stage: createjs.Stage;
+    
+constructor(stage:createjs.Stage){ //function initializes
   super ("../../Assets/Sprites/enemyUFO.png")    //asking path for bitmap
-  this.drawButton();
+  this.stage=stage;
   this.initialize();
+
+}
+private initialize():void {
+this.drawButton() ; // this.setButtonListeners();
+this.setButtonListeners(event);
 
 }
 
 public drawButton(): void{
-
-    let label: string;
-    let width;
-    let height;
-    let background;
-    let labelTxt;
-    let fontSize: string;
-    let borderColor = '#000';
-    let buttonColor = '#ccc';
-    let but;
-
-    
-
-}
-
-private initialize():void {
-this.drawButton() ; // this.setButtonListeners();
-this.setButtonListeners(event);
+this.y = 330 ; this.x= 300; // fixed position
+var butn : Button;
+var labelText : string;
+labelText = "play game" ; 
 
 }
 
@@ -45,9 +36,9 @@ console.log('game play')
 }
 
 
-
 public Update():void {
- //this.x = stage;
+ var x = this.stage;
+ var y = this.stage;
 }
 
 }} 
