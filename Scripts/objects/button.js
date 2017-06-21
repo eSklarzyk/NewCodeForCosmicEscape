@@ -43,10 +43,7 @@ var objects;
             //this.dispatchEvent(game.GameStateEvents.GAME);
         };
         Button.prototype.Update = function () {
-<<<<<<< HEAD:Scripts/objects/button.js
-            //this.x = stage;
-=======
->>>>>>> 143ffd852386cc7d1376d685e365804519069e98:Scripts/UI/components/button.js
+
         };
         return Button;
     }(createjs.Bitmap));
