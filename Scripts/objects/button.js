@@ -43,7 +43,7 @@ var objects;
             //this.dispatchEvent(game.GameStateEvents.GAME);
         };
         Button.prototype.Update = function () {
-
+        
         };
         return Button;
     }(createjs.Bitmap));
