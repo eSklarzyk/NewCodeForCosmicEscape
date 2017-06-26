@@ -1,4 +1,5 @@
-(function () {
+
+ (function () {
 
 window.game = window.game || {};
 
