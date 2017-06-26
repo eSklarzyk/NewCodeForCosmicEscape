@@ -1,7 +1,7 @@
 
  (function () {
 
-window.game = window.game || {};
+(<any>window).game = (<any>window).game || {};
 
 var GameStates = {
 MAIN_MENU : 0,
@@ -10,14 +10,16 @@ GAME:10,
 GAME_OVER:20
 }
 
-var GameStateEvents ={
-    MAIN_MENU: 'main-menu-event',
-    GAME_OVER: 'game-over-event',
-    GAME: 'game-event'
+
+let GameStateEvents: {
+    MAIN_MENU:  'main-menu-event';
+    GAME_OVER: 'game-over-event';
+    GAME: 'game-event' ;
+    
 }
 
-window.game.GameStates = GameStates;
-window.game.GameStateEvents = GameStateEvents;
+(<any>window).game.GameStates = GameStates;
+(<any>window).game.GameStateEvents = GameStateEvents;  
 
 } () );
 
