@@ -3,27 +3,29 @@
     function CosmicEscape() {
         this.initialize();
     }
+    var canvas = document.getElementById('canvas'); //declared twice to cover error
+    var stage = new createjs.Stage(canvas);
     var p = CosmicEscape.prototype;
     p.initialize = function () {
-        canvas = document.getElementById('canvas');
-        stage = new createjs.Stage(canvas);
+        var canvas = document.getElementById('canvas');
+        var stage = new createjs.Stage(canvas);
         createjs.Ticker.setFPS(60);
         createjs.Ticker.on('tick', this.onTick, this);
-        this.changeState(game.GameStates.MAIN_MENU);
+        this.changeState(window.game.GameStates.MAIN_MENU);
     };
     p.changeState = function (state) {
         this.currentGameState = state;
         switch (this.currentGameState) {
-            case game.GameStates.MAIN_MENU:
+            case window.game.GameStates.MAIN_MENU:
                 this.currentGameStateFunction = this.gameStateMainMenu;
                 break;
-            case game.GameStates.GAME:
+            case window.game.GameStates.GAME:
                 this.currentGameStateFunction = this.gameStateGame;
                 break;
-            case game.GameStates.RUN_SCENE:
+            case window.game.GameStates.RUN_SCENE:
                 this.currentGameStateFunction = this.gameStateRunScene;
                 break;
-            case game.GameStates.GAME_OVER:
+            case window.game.GameStates.GAME_OVER:
                 this.currentGameStateFunction = this.gameStateGameOver;
                 break;
         }
@@ -32,29 +34,29 @@
         this.changeState(data.state);
     };
     p.gameStateMainMenu = function () {
-        var scene = new game.GameMenu();
-        scene.on(game.GameStateEvents.GAME, this.onStateEvent, this, false, { state: game.GameStates.GAME });
+        var scene = new window.game.GameMenu();
+        scene.on(window.game.GameStateEvents.GAME, this.onStateEvent, this, false, { state: window.game.GameStates.GAME });
         stage.addChild(scene);
         stage.removeChild(this.currentScene);
         this.currentScene = scene;
-        this.changeState(game.GameStates.RUN_SCENE);
+        this.changeState(window.game.GameStates.RUN_SCENE);
     };
     p.gameStateGame = function () {
-        var scene = new game.Game();
-        scene.on(game.GameStateEvents.GAME_OVER, this.onStateEvent, this, false, { state: game.GameStates.GAME_OVER });
+        var scene = new window.game.Game();
+        scene.on(window.game.GameStateEvents.GAME_OVER, this.onStateEvent, this, false, { state: window.game.GameStates.GAME_OVER });
         stage.addChild(scene);
         stage.removeChild(this.currentScene);
         this.currentScene = scene;
-        this.changeState(game.GameStates.RUN_SCENE);
+        this.changeState(window.game.GameStates.RUN_SCENE);
     };
     p.gameStateGameOver = function () {
-        var scene = new game.GameOver();
+        var scene = new window.game.GameOver();
         stage.addChild(scene);
-        scene.on(game.GameStateEvents.MAIN_MENU, this.onStateEvent, this, false, { state: game.GameStates.MAIN_MENU });
-        scene.on(game.GameStateEvents.GAME, this.onStateEvent, this, false, { state: game.GameStates.GAME });
+        scene.on(window.game.GameStateEvents.MAIN_MENU, this.onStateEvent, this, false, { state: window.game.GameStates.MAIN_MENU });
+        scene.on(window.game.GameStateEvents.GAME, this.onStateEvent, this, false, { state: window.game.GameStates.GAME });
         stage.removeChild(this.currentScene);
         this.currentScene = scene;
-        this.changeState(game.GameStates.RUN_SCENE);
+        this.changeState(window.game.GameStates.RUN_SCENE);
     };
     p.gameStateRunScene = function (tickEvent) {
         if (this.currentScene.run) {
@@ -67,6 +69,6 @@
         }
         stage.update();
     };
-    window.game.CosmicEscape = CosmicEscape;
+    return window.game.CosmicEscape = CosmicEscape;
 }(window));
 //# sourceMappingURL=cosmicEscape.js.map

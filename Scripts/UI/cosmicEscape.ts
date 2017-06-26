@@ -1,30 +1,36 @@
 (function (window) {
-    window.game = window.game || {}
+    (<any>window).game = (<any>window).game || {}
     function CosmicEscape() {
        this.initialize();
     }
-    var p = CosmicEscape.prototype;
+
+let canvas = document.getElementById('canvas'); //declared twice to cover error
+let stage = new createjs.Stage(canvas);
+   
+   
+    let p = CosmicEscape.prototype;
+    
      p.initialize = function () {
-       canvas = document.getElementById('canvas');
-       stage = new createjs.Stage(canvas);
+      let canvas = document.getElementById('canvas');
+      let stage = new createjs.Stage(canvas);
        createjs.Ticker.setFPS(60);
        createjs.Ticker.on('tick', this.onTick, this);
-       this.changeState(game.GameStates.MAIN_MENU);
+       this.changeState((<any>window).game.GameStates.MAIN_MENU);
 }
 
 p.changeState = function (state) {
       this.currentGameState = state;
       switch (this.currentGameState) {
-         case game.GameStates.MAIN_MENU:
+         case (<any>window).game.GameStates.MAIN_MENU:
             this.currentGameStateFunction = this.gameStateMainMenu;
             break;
-         case game.GameStates.GAME:
+         case (<any>window).game.GameStates.GAME:
             this.currentGameStateFunction = this.gameStateGame;
             break;
-         case game.GameStates.RUN_SCENE:
+         case (<any>window).game.GameStates.RUN_SCENE:
             this.currentGameStateFunction = this.gameStateRunScene;
             break;
-         case game.GameStates.GAME_OVER:
+         case (<any>window).game.GameStates.GAME_OVER:
             this.currentGameStateFunction = this.gameStateGameOver;
             break;
 } }
@@ -33,33 +39,33 @@ p.changeState = function (state) {
 }
 
 p.gameStateMainMenu = function () {
-   var scene = new game.GameMenu();
-   scene.on(game.GameStateEvents.GAME, this.onStateEvent, this,
-      false, {state:game.GameStates.GAME});
+   var scene = new (<any>window).game.GameMenu();
+   scene.on((<any>window).game.GameStateEvents.GAME, this.onStateEvent, this,
+      false, {state:(<any>window).game.GameStates.GAME});
    stage.addChild(scene);
    stage.removeChild(this.currentScene);
    this.currentScene = scene;
-   this.changeState(game.GameStates.RUN_SCENE);
+   this.changeState((<any>window).game.GameStates.RUN_SCENE);
 }
 p.gameStateGame = function () {
-   var scene = new game.Game();
-   scene.on(game.GameStateEvents.GAME_OVER, this.onStateEvent, this,
-      false, {state:game.GameStates.GAME_OVER});
+   var scene = new (<any>window).game.Game();
+   scene.on((<any>window).game.GameStateEvents.GAME_OVER, this.onStateEvent, this,
+      false, {state:(<any>window).game.GameStates.GAME_OVER});
    stage.addChild(scene);
    stage.removeChild(this.currentScene);
    this.currentScene = scene;
-   this.changeState(game.GameStates.RUN_SCENE);
+   this.changeState((<any>window).game.GameStates.RUN_SCENE);
 }
 p.gameStateGameOver = function () {
-   var scene = new game.GameOver();
+   var scene = new (<any>window).game.GameOver();
    stage.addChild(scene);
-   scene.on(game.GameStateEvents.MAIN_MENU, this.onStateEvent, this,
-      false, {state:game.GameStates.MAIN_MENU});
-   scene.on(game.GameStateEvents.GAME, this.onStateEvent, this,
-      false, {state:game.GameStates.GAME});
+   scene.on((<any>window).game.GameStateEvents.MAIN_MENU, this.onStateEvent, this,
+      false, {state:(<any>window).game.GameStates.MAIN_MENU});
+   scene.on((<any>window).game.GameStateEvents.GAME, this.onStateEvent, this,
+      false, {state:(<any>window).game.GameStates.GAME});
    stage.removeChild(this.currentScene);
    this.currentScene = scene;
-   this.changeState(game.GameStates.RUN_SCENE);
+   this.changeState((<any>window).game.GameStates.RUN_SCENE);
 }
 p.gameStateRunScene = function (tickEvent) {
    if (this.currentScene.run) {
@@ -72,6 +78,6 @@ p.onTick = function (e) {
    stage.update();
 }
 
-    window.game.CosmicEscape = CosmicEscape;
+ return (<any>window).game.CosmicEscape = CosmicEscape;
 }(window));
  
