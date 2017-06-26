@@ -44,9 +44,7 @@ this.mainMenu();
       this.dispatchEvent((<any>window).game.GameStateEvents.MAIN_MENU);
    }
 
-    this.plGame = function (e) {
-      this.dispatchEvent((<any>window).game.GameStateEvents.GAME);
-   }
+   
   
  return (<any>window).game.GameOver = GameOver;
 }(window));

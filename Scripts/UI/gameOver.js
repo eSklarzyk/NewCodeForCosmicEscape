@@ -32,9 +32,6 @@
     this.mainMenu = function (e) {
         this.dispatchEvent(window.game.GameStateEvents.MAIN_MENU);
     };
-    this.plGame = function (e) {
-        this.dispatchEvent(window.game.GameStateEvents.GAME);
-    };
     return window.game.GameOver = GameOver;
 }(window));
 //# sourceMappingURL=gameOver.js.map
