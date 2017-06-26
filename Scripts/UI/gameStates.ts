@@ -3,7 +3,7 @@
 
 (<any>window).game = (<any>window).game || {};
 
-var GameStates = {
+let GameStates = {
 MAIN_MENU : 0,
 RUN_SCENE: 1,
 GAME:10,

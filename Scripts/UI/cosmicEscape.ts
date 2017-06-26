@@ -1,11 +1,14 @@
+
+/// <reference path="../Core/_reference.ts" />
+
 (function (window) {
     (<any>window).game = (<any>window).game || {}
     function CosmicEscape() {
        this.initialize();
     }
 
-var canvas:HTMLElement;
-  var stage:createjs.Stage;
+let canvas:HTMLElement;
+let stage:createjs.Stage;
    
     let p = CosmicEscape.prototype;
     
@@ -38,7 +41,7 @@ p.changeState = function (state) {
 }
 
 p.gameStateMainMenu = function () {
-   var scene = new (<any>window).game.GameMenu();
+   let scene = new (<any>window).game.GameMenu();
    scene.on((<any>window).game.GameStateEvents.GAME, this.onStateEvent, this,
       false, {state:(<any>window).game.GameStates.GAME});
    stage.addChild(scene);
@@ -47,7 +50,7 @@ p.gameStateMainMenu = function () {
    this.changeState((<any>window).game.GameStates.RUN_SCENE);
 }
 p.gameStateGame = function () {
-   var scene = new (<any>window).game.Game();
+   let scene = new (<any>window).game.Game();
    scene.on((<any>window).game.GameStateEvents.GAME_OVER, this.onStateEvent, this,
       false, {state:(<any>window).game.GameStates.GAME_OVER});
    stage.addChild(scene);
@@ -56,7 +59,7 @@ p.gameStateGame = function () {
    this.changeState((<any>window).game.GameStates.RUN_SCENE);
 }
 p.gameStateGameOver = function () {
-   var scene = new (<any>window).game.GameOver();
+   let scene = new (<any>window).game.GameOver();
    stage.addChild(scene);
    scene.on((<any>window).game.GameStateEvents.MAIN_MENU, this.onStateEvent, this,
       false, {state:(<any>window).game.GameStates.MAIN_MENU});

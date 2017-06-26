@@ -1,3 +1,4 @@
+/// <reference path="./_reference.ts" />
 // IIFE - Immediately Invoked Function Expression
 (function (window) {
     window.game = window.game || {};

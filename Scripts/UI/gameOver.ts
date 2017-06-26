@@ -2,15 +2,15 @@
   (<any>window).game =(<any>window).game || {}
    
    //Global Variables
- var canvas:HTMLElement;
-  var stage:createjs.Stage;
-  var clickMeButton: createjs.Bitmap;
+ let canvas:HTMLElement;
+let stage:createjs.Stage;
+  let clickMeButton: createjs.Bitmap;
 
    
    function GameOver() {
       this.initialize();
    }
-   var p = GameOver.prototype = new createjs.Container();
+   let p = GameOver.prototype = new createjs.Container();
    this.Container_initialize = this.initialize;
    
 this.titleTxt = null;
@@ -23,12 +23,12 @@ this.count = 0;
      this.addOptions();
    }
    this.addBack = function () {
-      var bag = new createjs.Bitmap("./assets/gameOver.png");
+      let bag = new createjs.Bitmap("./assets/gameOver.png");
       this.addChild(bag);
 }
 
 this.addOptions = function () {
- var option1;
+ let option1;
   option1 = new createjs.Bitmap("../Assets/Sprites/enemyUFO.png");
     option1.on("click", clickMeButton_Click);
     stage.addChild(option1);

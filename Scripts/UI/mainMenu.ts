@@ -1,15 +1,15 @@
 (function (window) {
     
 //Global Variables
- var canvas:HTMLElement;
-  var stage:createjs.Stage;
-  var clickMeButton: createjs.Bitmap;
+ let canvas:HTMLElement;
+  let stage:createjs.Stage;
+  let clickMeButton: createjs.Bitmap;
 
 (<any>window).game =(<any>window).game || {}
 function GameMenu(){
     this.initialize();
 }
-var p = GameMenu.prototype = new createjs.Container();
+let p = GameMenu.prototype = new createjs.Container();
 this.Container_initialize = this.initialize;
 
 this.addButton = null;
@@ -22,7 +22,7 @@ this.addButton();
 }
 
 this.addBG = function(){
-   var bg = new createjs.Bitmap("./assets/gameStart.png");
+   let bg = new createjs.Bitmap("./assets/gameStart.png");
     this.addChild(bg);  
 }
 

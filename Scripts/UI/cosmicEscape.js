@@ -1,3 +1,4 @@
+/// <reference path="../Core/_reference.ts" />
 (function (window) {
     window.game = window.game || {};
     function CosmicEscape() {

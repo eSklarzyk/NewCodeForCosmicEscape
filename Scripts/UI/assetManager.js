@@ -3,10 +3,10 @@
 (function () {
     (<any>window).game = (<any>window).game || {};
 
-   var AssetManager = function () {
+   let AssetManager = function () {
       this.initialize();
    }
-   var p = AssetManager.prototype = new createjs.EventDispatcher();
+   let p = AssetManager.prototype = new createjs.EventDispatcher();
    this.EventDispatcher_initialize = this.initialize;
   
  
