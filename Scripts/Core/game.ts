@@ -1,6 +1,6 @@
 // IIFE - Immediately Invoked Function Expression
 (function (window) {
-(<any>window).Game = (<any>window).Game ||{}
+(<any>window).game =(<any>window).game || {}
   let canvas = document.getElementById("canvas"); // hook into the canvas element
   let stage;
   let player;
