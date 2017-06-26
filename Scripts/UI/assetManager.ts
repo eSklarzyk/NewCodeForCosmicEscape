@@ -1,30 +1,33 @@
+
+/*
+
 (function () {
-    window.game = window.game || {};
+    (<any>window).game = (<any>window).game || {};
 
    var AssetManager = function () {
       this.initialize();
    }
    var p = AssetManager.prototype = new createjs.EventDispatcher();
-   p.EventDispatcher_initialize = p.initialize;
+   this.EventDispatcher_initialize = this.initialize;
   
  
 //graphics
-p.GAME_SPRITES = 'game sprites';
+this.GAME_SPRITES = 'game sprites';
 
 //data
-p.GAME_SPRITES_DATA = 'game sprites data';
+this.GAME_SPRITES_DATA = 'game sprites data';
 
 //events
-p.ASSETS_PROGRESS = 'assets progress';
-p.ASSETS_COMPLETE = 'assets complete';
+this.ASSETS_PROGRESS = 'assets progress';
+this.ASSETS_COMPLETE = 'assets complete';
 
-p.assetsPath = './assets/';
+this.assetsPath = './assets/';
 
-p.queue = null;
-p.loadManifest = null;
-p.loadProgress = 0;
+this.queue = null;
+this.loadManifest = null;
+this.loadProgress = 0;
 
- p.initialize = function () {
+ this.initialize = function () {
       this.EventDispatcher_initialize();
 this.loadManifest = [
    {id:this.GAME_SPRITES_DATA, src:this.assetsPath +
@@ -34,24 +37,25 @@ this.loadManifest = [
 
 }  
 
-p.preloadAssets = function () {
+this.preloadAssets = function () {
  this.queue.on('progress',this.assetsProgress,this);
    this.queue.on('complete',this.assetsLoaded,this);
    this.queue.loadManifest(this.loadManifest); 
 }
 
-p.assetsProgress = function (e) {
+this.assetsProgress = function (e) {
    this.loadProgress = e.progress;
    this.dispatchEvent(this.ASSETS_PROGRESS);
 }
-p.assetsLoaded = function (e) {
+this.assetsLoaded = function (e) {
    this.dispatchEvent(this.ASSETS_COMPLETE);
 }
 
-p.getAsset = function (asset) {
+this.getAsset = function (asset) {
    return this.queue.getResult(asset);
 }
 
 
-   window.AssetManager = AssetManager;
+   (<any>window).AssetManager = AssetManager;
 }());
+*/
