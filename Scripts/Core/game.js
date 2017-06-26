@@ -1,5 +1,6 @@
 // IIFE - Immediately Invoked Function Expression
-(function () {
+(function (window) {
+    window.Game = window.Game || {};
     var canvas = document.getElementById("canvas"); // hook into the canvas element
     var stage;
     var player;
@@ -66,6 +67,6 @@
         player = new objects._Player();
         stage.addChild(player);
     }
-    window.onload = Start;
-})();
+    window.game.Game = window.Game;
+})(window);
 //# sourceMappingURL=game.js.map
