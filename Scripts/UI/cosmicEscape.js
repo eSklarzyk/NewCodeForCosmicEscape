@@ -3,8 +3,8 @@
     function CosmicEscape() {
         this.initialize();
     }
-    var canvas = document.getElementById('canvas'); //declared twice to cover error
-    var stage = new createjs.Stage(canvas);
+    var canvas;
+    var stage;
     var p = CosmicEscape.prototype;
     p.initialize = function () {
         var canvas = document.getElementById('canvas');

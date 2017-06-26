@@ -4,9 +4,8 @@
        this.initialize();
     }
 
-let canvas = document.getElementById('canvas'); //declared twice to cover error
-let stage = new createjs.Stage(canvas);
-   
+var canvas:HTMLElement;
+  var stage:createjs.Stage;
    
     let p = CosmicEscape.prototype;
     

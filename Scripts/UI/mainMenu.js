@@ -1,36 +1,37 @@
 (function (window) {
+    //Global Variables
+    var canvas;
+    var stage;
+    var clickMeButton;
     window.game = window.game || {};
     function GameMenu() {
         this.initialize();
     }
     var p = GameMenu.prototype = new createjs.Container();
-    p.Container_initialize = p.initialize;
-    p.addButton = null;
-    p.count = 0;
-    p.initialize = function () {
+    this.Container_initialize = this.initialize;
+    this.addButton = null;
+    this.count = 0;
+    this.initialize = function () {
         this.Container_initialize();
         this.addBG();
         this.addButton();
     };
-    p.addBG = function () {
+    this.addBG = function () {
         var bg = new createjs.Bitmap("./assets/gameStart.png");
         this.addChild(bg);
     };
-    p.addButton = function () {
-        var btn, event;
-        btn = new ui.SimpleButton('Play Game');
-        btn.on('click', this.playGame, this);
-        btn.regX = btn.width / 2;
-        btn.x = canvas.width / 2;
-        btn.y = 400;
-        btn.setButtonListeners({ color: '#FFF', borderColor: '#FFF',
-            overColor: '#900' });
-        this.addChild(btn);
+    this.addButton = function () {
+        clickMeButton = new createjs.Bitmap("../Assets/Sprites/enemyUFO.png");
+        clickMeButton.on("click", clickMeButton_Click);
+        stage.addChild(clickMeButton);
     };
-    p.playGame = function (e) {
-        this.dispatchEvent(game.GameStateEvents.GAME);
+    function clickMeButton_Click() {
+        this.playGame();
+    }
+    this.playGame = function (e) {
+        this.dispatchEvent(window.game.GameStateEvents.GAME);
     };
-    window.game.GameMenu = GameMenu;
+    return window.game.GameMenu = GameMenu;
 }(window));
 /* var stage = new createjs.Stage("canvasElementId");
 var image = new createjs.Bitmap("./assets/gameStart.png");
