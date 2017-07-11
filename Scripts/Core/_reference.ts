@@ -2,5 +2,8 @@
 /// <reference path="../objects/asset.ts"/>
 /// <reference path="../objects/button.ts"/>
 /// <reference path="../objects/scene.ts"/>
+/// <reference path="../objects/vector2.ts"/>
+/// <reference path="../objects/gameObject.ts"/>
+/// <reference path="../managers/collision.ts"/>
 /// <reference path="../scenes/play.ts"/>
 /// <reference path="../scenes/mainMenu.ts"/>
