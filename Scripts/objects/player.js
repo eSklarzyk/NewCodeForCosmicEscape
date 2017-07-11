@@ -18,6 +18,8 @@ var objects;
         //creates an instance of player
         function Player(imageString) {
             var _this = _super.call(this, imageString) || this;
+            //window.addEventListener('keydown', this.KeyDown.bind(this), false);
+            // window.addEventListener('keyup', this.KeyUp.bind(this), false);
             _this.start();
             return _this;
         }

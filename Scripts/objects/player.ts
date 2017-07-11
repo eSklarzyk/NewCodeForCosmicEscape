@@ -10,6 +10,9 @@ module objects {
         constructor(imageString:string) {
             super(imageString)
 
+//window.addEventListener('keydown', this.KeyDown.bind(this), false);
+// window.addEventListener('keyup', this.KeyUp.bind(this), false);
+
             this.start();
         }
 
@@ -28,6 +31,8 @@ module objects {
                 this.x = (0 + (this.width * 0.5));
             }
         }
+
+
 
         // PUBLIC METHODS
         // used to initialize public properties 
