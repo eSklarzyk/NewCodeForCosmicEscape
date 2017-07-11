@@ -4,6 +4,9 @@ namespace core {
 
 export let assets: createjs.LoadQueue;
 
+//declare textureAtlas
+export let textureAtlas: createjs.SpriteSheet;
+
 let canvas: HTMLElement = document.getElementById("canvas");
 export let stage: createjs.Stage;
 
@@ -19,7 +22,9 @@ export let scene:number;
    let assetData: objects.Asset[] = [
 { id: "player ", src: "../../Assets/images/player.png "},
 { id: "background ", src: " ../../Assets/images/background.png"},
-{ id: "bullet ", src: " ../../Assets/images/laserRed.png"}
+{ id: "bullet ", src: " ../../Assets/images/laserRed.png"},
+{ id: "atlas", src: "../../Assets/images/atlas.png"}
+
     ];
 
  function preload():void{
@@ -34,7 +39,40 @@ stage.enableMouseOver(20);
 createjs.Ticker.framerate = 60;
 createjs.Ticker.on("tick", gameLoop);
 
+ let atlasData = {
 
+            "images": [
+                assets.getResult("atlas")
+            ],
+
+            "frames": [
+                [1, 1, 226, 178, 0, 0, 0],
+                [229, 1, 200, 50, 0, 0, 0],
+                [431, 1, 62, 62, 0, 0, 0],
+                [229, 53, 200, 50, 0, 0, 0],
+                [431, 65, 62, 51, 0, -3, -9],
+                [229, 105, 200, 50, 0, 0, 0],
+                [431, 118, 62, 51, 0, -3, -9],
+                [229, 157, 200, 50, 0, 0, 0],
+                [431, 171, 62, 51, 0, -3, -9]
+            ],
+
+            "animations": {
+                "cloud": [0],
+                "exitButton": [1],
+                "island": [2],
+                "nextButton": [3],
+                "restartButton": [5],
+                "startButton": [7],
+                "plane": {
+                    "frames":[4,6,8],
+                    "speed": 0.5
+                } 
+            }
+
+        };
+
+textureAtlas = new createjs.SpriteSheet(atlasData);
 scene = config.Scene.MENU;
 changeScene();
 
