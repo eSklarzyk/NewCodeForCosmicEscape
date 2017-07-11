@@ -1,17 +1,24 @@
 module objects {
   
     export class Player extends objects.GameObject {
-         // PRIVATE INSTANCE VARIABLES ++++++++++++++++++++++++++++
+         // PRIVATE INSTANCE VARIABLES 
 
-        // PUBLIC PROPERTIES +++++++++++++++++++++++++++++++++++++++
+        // PUBLIC PROPERTIES 
+        moveLeft: boolean = false;
+        moveRight: boolean = false;
+        moveUp: boolean = false;
+        moveDown: boolean = false;
+        speed: number = 3;
+
+
 
         // CONSTRUCTORS 
       //creates an instance of player
         constructor(imageString:string) {
             super(imageString)
 
-//window.addEventListener('keydown', this.KeyDown.bind(this), false);
-// window.addEventListener('keyup', this.KeyUp.bind(this), false);
+window.addEventListener('keydown', this.KeyDown.bind(this), false);
+window.addEventListener('keyup', this.KeyUp.bind(this), false);
 
             this.start();
         }
@@ -46,8 +53,83 @@ module objects {
         public update():void {
             // player to follow mouse
             this.position = new Vector2(this.x, this.y);
-            this.x = core.stage.mouseX;
-            this._checkBounds();
+             this.rotation = Math.atan2( this.y, this.x) * 180 / Math.PI;
+
+            if(this.moveLeft && this.x >= 0 + 50) {
+                this.x -= this.speed;
+            }
+
+            if (this.moveRight && this.x <= 640 - 50) {
+                this.x += this.speed;
+            }
+            if(this.moveUp && this.y >= 0 + 50) {
+                this.y -= this.speed;
+            }
+
+            if(this.moveDown && this.y <= 480 - 50) {
+                this.y += this.speed;
+            }
+
+                this._checkBounds();
+
+        }
+           public KeyDown(event: KeyboardEvent) {
+
+            switch (event.keyCode) {
+                case 38: /*up arrow*/
+                case 87: /* W Key */
+                        this.moveUp = true;
+                    break;
+
+                case 37: /*left arrow*/
+                case 65: /* A Key */
+                        this.moveLeft = true;
+                    break;
+
+                case 40: /*down arrow*/
+                case 83: /* S Key */
+                        this.moveDown = true;
+                    break;
+
+                case 39: /*right arrow*/
+                case 68: /* D Key */
+                        this.moveRight = true;
+                    break;
+
+                case 81: /* pause */
+                    console.log("paused");
+                    //add paused/suiside
+                    break;
+            }
+        }
+
+        public KeyUp(event: KeyboardEvent) {
+            switch (event.keyCode) {
+                case 38: /*up arrow*/
+                case 87: /* W Key */
+                    this.moveUp = false;
+                    break;
+
+                case 37: /*left arrow*/
+                case 65: /* A Key */
+                    this.moveLeft = false;
+                    break;
+                    
+                case 40: /*down arrow*/
+                case 83: /* S Key */
+                    this.moveDown = false;
+                    break;
+
+                case 39: /*right arrow*/
+                case 68: /* D Key */
+                    this.moveRight = false;
+                    break;
+
+                case 81: /* pause */
+                    console.log("unpaused");
+                    //add paused/suiside
+                    break;
+            }
         }
     }
 }

@@ -12,9 +12,23 @@ var scenes;
 (function (scenes) {
     var Play = (function (_super) {
         __extends(Play, _super);
+        //creates an instance of Play
         function Play() {
             return _super.call(this) || this;
         }
+        Play.prototype.Start = function () {
+            this._player = new objects.Player("plane");
+            this.addChild(this._player);
+            core.stage.addChild(this);
+        };
+        Play.prototype.Update = function () {
+            this._player.update();
+            /*   if (core.lives < 1) {
+                        this._engineSound.stop();
+                        core.scene = config.Scene.OVER;
+                        core.changeScene();
+                    }  */
+        };
         return Play;
     }(objects.Scene));
     scenes.Play = Play;

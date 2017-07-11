@@ -12,14 +12,19 @@ var objects;
 (function (objects) {
     var Player = (function (_super) {
         __extends(Player, _super);
-        // PRIVATE INSTANCE VARIABLES ++++++++++++++++++++++++++++
-        // PUBLIC PROPERTIES +++++++++++++++++++++++++++++++++++++++
         // CONSTRUCTORS 
         //creates an instance of player
         function Player(imageString) {
             var _this = _super.call(this, imageString) || this;
-            //window.addEventListener('keydown', this.KeyDown.bind(this), false);
-            // window.addEventListener('keyup', this.KeyUp.bind(this), false);
+            // PRIVATE INSTANCE VARIABLES 
+            // PUBLIC PROPERTIES 
+            _this.moveLeft = false;
+            _this.moveRight = false;
+            _this.moveUp = false;
+            _this.moveDown = false;
+            _this.speed = 3;
+            window.addEventListener('keydown', _this.KeyDown.bind(_this), false);
+            window.addEventListener('keyup', _this.KeyUp.bind(_this), false);
             _this.start();
             return _this;
         }
@@ -44,8 +49,68 @@ var objects;
         Player.prototype.update = function () {
             // player to follow mouse
             this.position = new objects.Vector2(this.x, this.y);
-            this.x = core.stage.mouseX;
+            this.rotation = Math.atan2(this.y, this.x) * 180 / Math.PI;
+            if (this.moveLeft && this.x >= 0 + 50) {
+                this.x -= this.speed;
+            }
+            if (this.moveRight && this.x <= 640 - 50) {
+                this.x += this.speed;
+            }
+            if (this.moveUp && this.y >= 0 + 50) {
+                this.y -= this.speed;
+            }
+            if (this.moveDown && this.y <= 480 - 50) {
+                this.y += this.speed;
+            }
             this._checkBounds();
+        };
+        Player.prototype.KeyDown = function (event) {
+            switch (event.keyCode) {
+                case 38: /*up arrow*/
+                case 87:
+                    this.moveUp = true;
+                    break;
+                case 37: /*left arrow*/
+                case 65:
+                    this.moveLeft = true;
+                    break;
+                case 40: /*down arrow*/
+                case 83:
+                    this.moveDown = true;
+                    break;
+                case 39: /*right arrow*/
+                case 68:
+                    this.moveRight = true;
+                    break;
+                case 81:
+                    console.log("paused");
+                    //add paused/suiside
+                    break;
+            }
+        };
+        Player.prototype.KeyUp = function (event) {
+            switch (event.keyCode) {
+                case 38: /*up arrow*/
+                case 87:
+                    this.moveUp = false;
+                    break;
+                case 37: /*left arrow*/
+                case 65:
+                    this.moveLeft = false;
+                    break;
+                case 40: /*down arrow*/
+                case 83:
+                    this.moveDown = false;
+                    break;
+                case 39: /*right arrow*/
+                case 68:
+                    this.moveRight = false;
+                    break;
+                case 81:
+                    console.log("unpaused");
+                    //add paused/suiside
+                    break;
+            }
         };
         return Player;
     }(objects.GameObject));
