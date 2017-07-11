@@ -20,7 +20,10 @@ core.stage.addChild(this);
 }
 
 public Update():void {
+    
+    this._player.giveData(core.stage.mouseX, core.stage.mouseY);
     this._player.update();
+
     
     /*   if (core.lives < 1) {
                 this._engineSound.stop();

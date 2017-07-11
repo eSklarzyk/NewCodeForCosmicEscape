@@ -3,21 +3,17 @@
 namespace core {
 
 export let assets: createjs.LoadQueue;
-
 //declare textureAtlas
 export let textureAtlas: createjs.SpriteSheet;
-
 let canvas: HTMLElement = document.getElementById("canvas");
 export let stage: createjs.Stage;
-
 //scene variables
 let currentScene: objects.Scene;
 export let scene:number;
-
-  let menu: scenes.Menu;
+let menu: scenes.Menu;
    // let over: scenes.Over;
-    let play: scenes.Play;
-
+let play: scenes.Play;
+    
     //asset manifest
    let assetData: objects.Asset[] = [
 { id: "player ", src: "../../Assets/images/player.png "},

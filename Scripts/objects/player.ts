@@ -8,7 +8,9 @@ module objects {
         moveRight: boolean = false;
         moveUp: boolean = false;
         moveDown: boolean = false;
-        speed: number = 3;
+        speed: number = 5;
+        MX:number;
+        MY:number;
 
 
 
@@ -53,7 +55,8 @@ window.addEventListener('keyup', this.KeyUp.bind(this), false);
         public update():void {
             // player to follow mouse
             this.position = new Vector2(this.x, this.y);
-             this.rotation = Math.atan2( this.y, this.x) * 180 / Math.PI;
+
+this.rotation = Math.atan2(this.MY - this.y, this.MX - this.x) * 180 / Math.PI;
 
             if(this.moveLeft && this.x >= 0 + 50) {
                 this.x -= this.speed;
@@ -73,6 +76,7 @@ window.addEventListener('keyup', this.KeyUp.bind(this), false);
                 this._checkBounds();
 
         }
+
            public KeyDown(event: KeyboardEvent) {
 
             switch (event.keyCode) {
@@ -131,5 +135,11 @@ window.addEventListener('keyup', this.KeyUp.bind(this), false);
                     break;
             }
         }
-    }
+     public giveData(SX:any, SY:any)
+        {
+            this.MX = SX;
+            this.MY = SY;     
+        }
+
+}
 }

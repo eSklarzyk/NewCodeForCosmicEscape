@@ -22,7 +22,7 @@ var objects;
             _this.moveRight = false;
             _this.moveUp = false;
             _this.moveDown = false;
-            _this.speed = 3;
+            _this.speed = 5;
             window.addEventListener('keydown', _this.KeyDown.bind(_this), false);
             window.addEventListener('keyup', _this.KeyUp.bind(_this), false);
             _this.start();
@@ -49,7 +49,7 @@ var objects;
         Player.prototype.update = function () {
             // player to follow mouse
             this.position = new objects.Vector2(this.x, this.y);
-            this.rotation = Math.atan2(this.y, this.x) * 180 / Math.PI;
+            this.rotation = Math.atan2(this.MY - this.y, this.MX - this.x) * 180 / Math.PI;
             if (this.moveLeft && this.x >= 0 + 50) {
                 this.x -= this.speed;
             }
@@ -111,6 +111,10 @@ var objects;
                     //add paused/suiside
                     break;
             }
+        };
+        Player.prototype.giveData = function (SX, SY) {
+            this.MX = SX;
+            this.MY = SY;
         };
         return Player;
     }(objects.GameObject));

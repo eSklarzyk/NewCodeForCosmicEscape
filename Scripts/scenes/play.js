@@ -22,6 +22,7 @@ var scenes;
             core.stage.addChild(this);
         };
         Play.prototype.Update = function () {
+            this._player.giveData(core.stage.mouseX, core.stage.mouseY);
             this._player.update();
             /*   if (core.lives < 1) {
                         this._engineSound.stop();
