@@ -1,3 +1,6 @@
+
+//USED FOR COLLISION
+
 module utility {
   export class Vector2 extends createjs.Point {
     constructor(x:number, y:number) {
